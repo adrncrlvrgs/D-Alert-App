@@ -8,7 +8,7 @@ function HomeView() {
 
   return (
     <View style={{ display: 'flex' , justifyContent: 'center', alignItems: 'center', position: 'relative', top: '40%'}}>
-      <Text>THIS IS THE LANDING PAGE. note: put here the d alert logo and the get started bottom below </Text>
+      <Text> logo </Text>
 
       <TouchableOpacity
           style={{ marginLeft: 5 }}
@@ -16,7 +16,7 @@ function HomeView() {
             navigation.navigate("Login")
           }}
         >
-          <Text style={{ color: '#06b6d4', fontSize: 16, fontWeight: 'bold' }}>GO TO LOG IN</Text>
+          <Text style={{ color: '#06b6d4', fontSize: 16, fontWeight: 'bold' }}>LOG IN</Text>
         </TouchableOpacity>
     </View>
   )
