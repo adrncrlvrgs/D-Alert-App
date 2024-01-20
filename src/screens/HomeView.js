@@ -7,16 +7,15 @@ function HomeView() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ display: 'flex' , justifyContent: 'center', alignItems: 'center', position: 'relative', top: '40%'}}>
-      <Text> logo </Text>
+    <View className="flex justify-center items-center relative top-60">
+      <Text> D-ALERT LOGO </Text>
 
-      <TouchableOpacity
-          style={{ marginLeft: 5 }}
+      <TouchableOpacity className="ml-5 mt-60"
           onPress={() => {
             navigation.navigate("Login")
           }}
         >
-          <Text style={{ color: '#06b6d4', fontSize: 16, fontWeight: 'bold' }}>LOG IN</Text>
+          <Text className="text-blue-500 text-lg font-bold">LOG IN</Text>
         </TouchableOpacity>
     </View>
   )

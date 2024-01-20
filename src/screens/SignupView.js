@@ -7,7 +7,7 @@ function SignupView() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ display: 'flex' , justifyContent: 'center', alignItems: 'center', position: 'relative', top: '40%'}}>
+    <View className="flex justify-center items-center relative top-80">
       <Text>This the signup screen</Text>
 
       <TouchableOpacity
@@ -16,7 +16,7 @@ function SignupView() {
             navigation.navigate("Home")
           }}
         >
-          <Text style={{ color: '#06b6d4', fontSize: 16, fontWeight: 'bold' }}>GO BACK TO HOME</Text>
+          <Text className="text-blue-500 text-lg font-bold">GO BACK TO HOME</Text>
         </TouchableOpacity>
 
     </View>
