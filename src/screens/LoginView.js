@@ -1,26 +1,97 @@
-import React from 'react'
-import {Text,View,TouchableOpacity} from 'react-native';
+import React,{useState,useRef} from 'react'
+import {Text,View,TouchableOpacity,Alert,TextInput} from 'react-native';
+import { signInWithPhoneNumber } from 'firebase/auth';
 import {useNavigation} from "@react-navigation/core"
+import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
+import app,{auth} from '../../firebase-config';
+import { PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function LoginView() {
+const LoginView = () =>{
 
-  const navigation = useNavigation();
+  const navigation = useNavigation()
+  
+  const [contactNumber,setContactNumber] = useState('+63-976-506-4197')
+  const [otp,setOtp] = useState('')
+  const [verificationID, setVerificationID] = useState(null)
+  const recapchaVerifier = useRef(null)
+
+  const sendVerification = () =>{
+    const phoneProvider = new PhoneAuthProvider()
+      phoneProvider
+      .verifyPhoneNumber(contactNumber,recapchaVerifier.current)
+      .then(setVerificationID)
+      setContactNumber('')
+  }
+
+  const confirmCode = () =>{
+    const credential = PhoneAuthProvider.credential(
+      verificationID,
+      otp
+    );
+    signInWithCredential(auth,credential)
+    .then((userCredential)=>{
+        setOtp('')
+        const user = userCredential.user;
+        AsyncStorage.setItem('user', JSON.stringify(user));
+    })
+    .catch((error)=>{
+      alert(error)
+      console.log(error.message)
+    })
+    Alert.alert(
+      "Login Succesful"
+    )
+  }
+
 
   return (
-    <View className="flex justify-center items-center relative top-80">
-      <Text>This is the login screen</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <FirebaseRecaptchaVerifierModal
+        ref={recapchaVerifier}
+        firebaseConfig={app.options}
+      />
 
-      <TouchableOpacity className="ml-5"
+      <Text>
+        Login using your number
+      </Text>
+
+      <TextInput
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+        placeholder="Phone Number"
+        value={contactNumber}
+        onChangeText={setContactNumber}
+        keyboardType="phone-pad"
+        autoComplete='tel'
+      />
+      <TouchableOpacity onPress={sendVerification} style={{ marginBottom: 20 }}>
+        <Text>Send Verification</Text>
+      </TouchableOpacity>
+
+      <TextInput
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+        placeholder="Enter OTP"
+        value={otp}
+        onChangeText={setOtp}
+        keyboardType="number-pad"
+      />
+      <TouchableOpacity onPress={confirmCode}>
+        <Text>Confirm OTP</Text>
+      </TouchableOpacity>
+
+
+
+      <TouchableOpacity
+          style={{ marginLeft: 5 }}
           onPress={() => {
             navigation.navigate("Signup")
           }}
         >
-          <Text className="text-blue-500 text-lg font-bold">GO TO SIGN UP PAGE</Text>
-        </TouchableOpacity>
-
+          <Text className="text-blue-500 text-lg font-bold">GO BACK TO HOME</Text>
+      </TouchableOpacity>
 
     </View>
-  )
+  );
 }
 
 export default LoginView
