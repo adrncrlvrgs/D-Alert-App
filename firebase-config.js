@@ -20,25 +20,25 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth  = getAuth(app)
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
+// onAuthStateChanged(auth, (user) => {
+//     if (user) {
    
-      AsyncStorage.setItem('user', JSON.stringify(user));
-    } else {
+//       AsyncStorage.setItem('user', JSON.stringify(user));
+//     } else {
 
-      AsyncStorage.removeItem('user');
-    }
-  });
+//       AsyncStorage.removeItem('user');
+//     }
+//   });
   
 
-  const getUserFromStorage = async () => {
-    const storedUser = await AsyncStorage.getItem('user');
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
+//   const getUserFromStorage = async () => {
+//     const storedUser = await AsyncStorage.getItem('user');
+//     if (storedUser) {
+//       const user = JSON.parse(storedUser);
      
-    }
-  };
+//     }
+//   };
   
-  getUserFromStorage();
+//   getUserFromStorage();
 
 export default app;

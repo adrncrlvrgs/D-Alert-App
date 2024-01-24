@@ -58,7 +58,6 @@ const SignUpView = () =>  {
     try {
       const credential = PhoneAuthProvider.credential(verificationId, verificationCode);
       const userCredential = await signInWithPhoneNumber(auth, credential);
-      // Additional logic to handle user creation or sign in
     } catch (error) {
       Alert.alert("Error", error.message);
     }
