@@ -2,6 +2,7 @@
   "expo": {
     "name": "D-Alert",
     "slug": "D-Alert",
+    "plugins": ["@react-native-firebase/app", "@react-native-firebase/auth"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,13 +19,20 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yano_04.DAlert"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "92e70c27-0196-42e6-abc4-fb1885aaddb3"
+      }
     }
   }
 }

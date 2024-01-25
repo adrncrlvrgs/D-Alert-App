@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "174354462163",
+    "project_id": "d-alert-app-827dd",
+    "storage_bucket": "d-alert-app-827dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174354462163:android:7c628cbbbbd47feae4eb26",
+        "android_client_info": {
+          "package_name": "com.yano_04.DAlert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhh7S1bFsn9ViykuJgoX_k3D9tFDePaDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
