@@ -73,12 +73,12 @@ return(
             Enter OTP code
           </Text>
                 <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
-                placeholder="Enter OTP"
-                value={otp}
-                onChangeText={setOtp}
-                keyboardType="number-pad"
-              />
+                  style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                  placeholder="Enter OTP"
+                  value={otp}
+                  onChangeText={setOtp}
+                  keyboardType="number-pad"
+                />
               <TouchableOpacity onPress={confirmCode}>
                 <Text>Confirm OTP</Text>
               </TouchableOpacity>
@@ -95,6 +95,4 @@ return(
   
 }
 
-
-//error in otp
 export default LoginView
