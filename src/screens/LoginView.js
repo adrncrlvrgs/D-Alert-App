@@ -11,35 +11,35 @@ const LoginView = () =>{
 
     const navigation = useNavigation();
 
-    const signIn = async () =>{
-      try{
-        const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
-        setConfirm(confirmation)
-      }catch (e){
-        console.log("Error sending code", e.message)
-      }
+    const checkUserExists = async (phoneNumber) =>{
+      const usersRef = firestore().collection('users');
+      const querySnapshot = await usersRef.where('phoneNumber', '==', phoneNumber).get();
+      return !querySnapshot.empty;
     }
 
-    const confirmCode = async () =>{
-      try{
-        const userCredential = await confirm.confirm(otp)
-        const user = userCredential.user;
-
-        const userDocument = await firestore()
-        .collection("users")
-        .doc(user.uid)
-        .get();
-
-        if (userCredential.exists){
-          navigation.navigate("Home")
-        }else{
-          navigation.navigate("Home")
-          Alert.alert("Not exist", "this phone number is not exist")
+    const signIn = async () => {
+      const userExists = await checkUserExists(phoneNumber);
+      if (userExists) {
+        try {
+          const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+          setConfirm(confirmation);
+        } catch (e) {
+          console.log("Error sending code", e.message);
         }
-      }catch(e){
-          console.log(e)
+      } else {
+        navigation.navigate("Signup");
       }
-    }
+    };
+  
+    const confirmCode = async () => {
+      try {
+        await confirm.confirm(otp);
+        navigation.navigate("Home");
+      } catch (e) {
+        console.log(e.message);
+        Alert.alert("Authentication Failed", "Failed to authenticate OTP.");
+      }
+    };
 
 return(
    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -70,8 +70,8 @@ return(
         ):(
           <>
             <Text>
-            Enter OTP code
-          </Text>
+              Enter OTP code
+            </Text>
                 <TextInput
                   style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
                   placeholder="Enter OTP"
@@ -86,8 +86,6 @@ return(
           
         )
       }
-
-      
 
     </View>
 )

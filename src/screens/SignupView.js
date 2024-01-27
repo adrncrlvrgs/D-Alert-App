@@ -6,74 +6,125 @@ import { CusSelectDropDown } from '../../components/index';
 import firestore from "@react-native-firebase/firestore"
 
 
-const SignUpView = ({ route , navigation}) =>  {
+const SignUpView = () =>  {
 
-  const { uid } = route.params;
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
+  const [phoneNumber,setphoneNumber] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [gender, setGender] = useState('')
+  const [otp,setOtp] = useState('')
+  const [confirm,setConfirm] = useState(null)
 
-  const saveDetails = async ()=>{
+  const signUp = async ()=>{
     try{
-      await firestore().collection("users").doc(uid).set({
-        name,
-        email,
-        gender
-      })
-
-      navigation.navigate("Home")
-
+      console.log('test')
+      const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
+      setConfirm(confirmation)
     }catch(e){
-      Alert.alert("error", e.message)
+      console.log('Sign Up Error:', e.message);
+    }
+  }
+
+  const confirmCode = async ()=>{
+    try{
+      const userCredential = await confirm.confirm(otp)
+
+      if(userCredential.user){
+
+        await firestore().collection('users').doc(userCredential.user.uid).set({
+          phoneNumber: phoneNumber,
+          name:name,
+          email: email,
+          gender:gender,
+          status: 'active'
+        })
+
+        navigation.navigate('Home');
+      }
+    }catch(e){
+      console.log(e.message)
+      Alert.alert('Verification Failed', 'Invalid OTP or verification failed.');
     }
   }
 
   return (
-    <View className="flex justify-center items-center relative top-20">
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>This the signup screen</Text>
-      <TouchableOpacity
-          style={{ marginLeft: 5 }}
-          onPress={() => {
-            navigation.navigate("Home")
-          }}
-        >
-          <Text className="text-blue-500 text-lg font-bold">GO BACK TO HOME</Text>
-      </TouchableOpacity>
-
-      <View>
-        <Text>Enter your name</Text>
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
-          placeholder="Name"
-          value={name}
-          onChangeText={setName}
-        />
-        <Text>Enter your email</Text>
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
-          placeholder="E-mail"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-        />
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
-          placeholder=""
-          value={''}
-          onChangeText={''}
-          keyboardType=""
-        />
-
-        <CusSelectDropDown/>
-
-        <TouchableOpacity>
-          <Button
-            onPress={()=>{saveDetails}}
+      
+      <Text>
+        Sign Up
+      </Text>
+      {
+        !confirm?(
+          <View>
+          <Text>
+            Enter your phone number
+          </Text>
+  
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChangeText={setphoneNumber}
+            keyboardType="phone-pad"
+            autoComplete='tel'
           />
-        </TouchableOpacity>
+  
+          <Text>Enter your name</Text>
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+            placeholder="Name"
+            value={name}
+            onChangeText={setName}
+          />
+          <Text>Enter your email</Text>
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+            placeholder="E-mail"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+          />
 
-      </View>
+          {/* paayos pre, need dropbox para sa gender, may example ako na component na dinownload  '<CusSelectDropDown/>' */}
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+            placeholder=""
+            value={gender}
+            onChangeText={setGender}
+  
+          />
+  
+          <CusSelectDropDown/>
+  
+          <TouchableOpacity>
+            <Button
+              onPress={()=>{signUp()}}
+              title='Register'
+            />
+          </TouchableOpacity>
+  
+        </View>
+        ):(
+          <>
+          <Text>
+            Enter OTP code
+          </Text>
+              <TextInput
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                placeholder="Enter OTP"
+                value={otp}
+                onChangeText={setOtp}
+                keyboardType="number-pad"
+              />
+            <TouchableOpacity onPress={()=>confirmCode()}>
+              <Text>Confirm OTP</Text>
+            </TouchableOpacity>
+        </> 
+        )
+      }
+
     </View>
   )
 }

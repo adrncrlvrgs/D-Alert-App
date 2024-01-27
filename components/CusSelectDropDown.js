@@ -1,8 +1,5 @@
 import SelectDropdown from 'react-native-select-dropdown'
 
-
-
-
 const CusSelectDropDown = () =>{
 
     const countries = ["Egypt", "Canada", "Australia", "Ireland"]
