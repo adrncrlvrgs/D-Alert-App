@@ -2,8 +2,6 @@ import React from 'react'
 import {Text,View,TouchableOpacity} from 'react-native';
 import {useNavigation} from "@react-navigation/core"
 
-
-
 function HomeView() {
   const navigation = useNavigation();
 
@@ -16,6 +14,7 @@ function HomeView() {
             navigation.navigate("Login")
           }}
         >
+          <Text>Dashboad</Text>
           <Text className="text-blue-500 text-lg font-bold">LOG IN</Text>
         </TouchableOpacity>
 

@@ -9,9 +9,9 @@ function Navigator() {
   return (
     <Stack.Navigator screenOptions={{ headerTintColor: 'black', headerTitleStyle: { fontWeight: 'bold',},}}>
       <Stack.Screen name="Start" component={Start} options={{headerShown: false}} />
-      <Stack.Screen name="Home" component={Home} options={{title: 'Home' }} />
-      <Stack.Screen name="Login" component={Login} options={{title: 'LOGIN' }} />
-      <Stack.Screen name="Signup" component={SignUp} options={{title: 'SIGNUP' }} />
+      <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+      <Stack.Screen name="Login" component={Login} options={{headerShown: true }} />
+      <Stack.Screen name="Signup" component={SignUp} options={{headerShown: false }} />
     </Stack.Navigator>
   )
 }
