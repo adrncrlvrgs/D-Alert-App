@@ -18,22 +18,20 @@ const signupValidationSchema = Yup.object().shape({
   gender: Yup.string()
     .required('Gender is required'),
   otp: Yup.string()
-    .required('OTP is required')
+  .when("confirm", {
+    is: true,
+    then: Yup.string().required('OTP is required') 
+  }),
 })
 
 const SignUpView = () =>  {
 
+  const [confirm, setConfirm] = useState(null);
   const navigation = useNavigation();
-  const [phoneNumber,setphoneNumber] = useState('')
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [gender, setGender] = useState('')
-  const [otp,setOtp] = useState('')
-  const [confirm,setConfirm] = useState(null)
 
   const signUp = async (phoneNumber)=>{
+
     try{
-      console.log('test')
       const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
       setConfirm(confirmation)
     }catch(e){
@@ -41,17 +39,17 @@ const SignUpView = () =>  {
     }
   }
 
-  const confirmCode = async (otp)=>{
+  const confirmCode = async (values)=>{
     try{
-      const userCredential = await confirm.confirm(otp)
+      const userCredential = await confirm.confirm(values.otp)
 
       if(userCredential.user){
 
         await firestore().collection('users').doc(userCredential.user.uid).set({
-          phoneNumber: phoneNumber,
-          name:name,
-          email: email,
-          gender:gender,
+          phoneNumber: values.phoneNumber,
+          name: values.name,
+          email: values.email,
+          gender:values.gender,
           status: 'active'
         })
 
@@ -77,13 +75,14 @@ const SignUpView = () =>  {
             otp: '',
           }}
           validationSchema={signupValidationSchema}
-          onSubmit={(values) =>{
-            if(!confirm){
+          onSubmit={(values) => {
+            if (!confirm) {
               signUp(values.phoneNumber);
-            }else{
-              confirmCode(values.otp);
+            } else {
+              confirmCode(values);
             }
           }}
+          
         >
           {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
             <>
@@ -93,7 +92,7 @@ const SignUpView = () =>  {
                   <TextInput
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
                     placeholder="Phone Number"
-                    onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
+                    onChangeText={handleChange('phoneNumber')}
                     onBlur={handleBlur('phoneNumber')}
                     value={values.phoneNumber}
                     keyboardType="phone-pad"
@@ -108,6 +107,7 @@ const SignUpView = () =>  {
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
                     placeholder="Name"
                     onChangeText={handleChange('name')}
+                    onBlur={handleBlur('name')}
                     value={values.name}
                   />
                   {errors.name && touched.name && (
@@ -119,6 +119,7 @@ const SignUpView = () =>  {
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
                     placeholder="E-mail"
                     onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
                     value={values.email}
                     keyboardType="email-address"
                   />
@@ -133,6 +134,7 @@ const SignUpView = () =>  {
                     placeholder=""
                     value={values.gender}
                     onChangeText={handleChange('gender')}
+                    onBlur={handleBlur('gender')}
                   />
 
                   {errors.gender && touched.gender && (
