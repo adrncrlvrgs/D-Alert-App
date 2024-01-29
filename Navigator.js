@@ -11,7 +11,7 @@ function Navigator() {
       <Stack.Screen name="Start" component={Start} options={{headerShown: false}} />
       <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
       <Stack.Screen name="Login" component={Login} options={{headerShown: true }} />
-      <Stack.Screen name="Signup" component={SignUp} options={{headerShown: false }} />
+      <Stack.Screen name="Signup" component={SignUp} options={{headerShown: true }} />
     </Stack.Navigator>
   )
 }

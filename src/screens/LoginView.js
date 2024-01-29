@@ -15,12 +15,9 @@ const loginValidationSchema = Yup.object().shape({
     .required('Phone number is required')
     .min(10, 'Phone number is not valid'),
   otp: Yup.string()
-    .when("confirm", {
-      is: true,
-      then: Yup.string().required('OTP is required') // eto mismo nga validation nya
-    }),
+    .required('OTP is required') // eto mismo yung mga validation nya
 
-  // can be more depende kung ilang fields
+  //... can be more depende kung ilang fields
 });
 
 const LoginView = () => {
