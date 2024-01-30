@@ -1,6 +1,8 @@
 import React from 'react'
-import {Text,View,TouchableOpacity} from 'react-native';
+import {View,TouchableOpacity, StyleSheet} from 'react-native';
 import {useNavigation} from "@react-navigation/core"
+import { CusBody } from '../../components/index.js';
+import { Text, Button } from '@react-native-material/core'
 
 
 function StartView() {
@@ -8,29 +10,41 @@ function StartView() {
   const navigation = useNavigation();
 
   return (
-    <View className="flex justify-center items-center relative top-60">
-      <Text> D-ALERT LOGO</Text>
-
-        <TouchableOpacity className="ml-5 mt-60"
-          onPress={() => {
+    <CusBody
+      components={
+        <View style={styles.container}>
+        <Text> D-ALERT LOGO</Text>
+        <Button
+          style={{marginTop: 60}}
+          title={'Login'}
+          onPress={()=>{
             navigation.navigate("Login")
           }}
-        >
-          <Text className="text-blue-500 text-lg font-bold">LOG IN</Text>
-        </TouchableOpacity>
+        />
+  
+          <Text>Don't have an account? 
+              <TouchableOpacity
+                  onPress={() => {
+                      navigation.navigate("Signup")
+                  }}
+              >
+              <Text className="text-blue-500 text-lg font-bold">Sign up</Text>
+              </TouchableOpacity>
+          </Text>
+  
+      </View>
+      }
+    />
 
-        <Text>Don't have an account? 
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate("Signup")
-                }}
-            >
-            <Text className="text-blue-500 text-lg font-bold">Sign up</Text>
-            </TouchableOpacity>
-        </Text>
-
-    </View>
   )
 }
 
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent:'center',
+    alignItems: 'center',
+    textAlign: 'center'
+  }
+})
 export default StartView

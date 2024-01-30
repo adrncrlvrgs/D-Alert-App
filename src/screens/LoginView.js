@@ -1,10 +1,15 @@
 import React,{useState,useRef} from 'react'
-import { View,Text, TextInput, TouchableOpacity, Alert, Button } from 'react-native'
+import { View,Text, TouchableOpacity, Alert, StyleSheet } from 'react-native'
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore"
+import { CusBody } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+
+
+import { TextInput,Button } from '@react-native-material/core';
+
 
 //BALI GANITONG PATTERN DIN SA SIGN UP
 
@@ -60,7 +65,10 @@ const LoginView = () => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    
+    <CusBody
+      components={
+        <View>
       <Text>Login using your number</Text>
 
 
@@ -83,7 +91,7 @@ const LoginView = () => {
             {!confirm ? (
               <>
                 <TextInput
-                  style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                  // style={ {width: '80%' }}
                   placeholder="Phone Number"
                   onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
                   onBlur={handleBlur('phoneNumber')}
@@ -99,7 +107,7 @@ const LoginView = () => {
             ) : (
               <>
                 <TextInput
-                  style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                  style={{width: '80%' }}
                   placeholder="Enter OTP"
                   onChangeText={handleChange('otp')}
                   onBlur={handleBlur('otp')}
@@ -116,8 +124,19 @@ const LoginView = () => {
         )}
       </Formik>
     </View>
+      }
+    />
+    
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent:'center',
+    alignItems: 'center',
+    textAlign: 'center'
+  }
+})
 
 
 export default LoginView

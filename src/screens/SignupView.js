@@ -1,11 +1,12 @@
 import React,{useState} from 'react'
-import { View, TextInput, Button, Text, Alert,TouchableOpacity } from 'react-native';
+import { View,  Button, Text, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import auth from "@react-native-firebase/auth"
 import { CusSelectDropDown } from '../../components/index';
 import firestore from "@react-native-firebase/firestore"
 import { Formik } from 'formik';
 import * as Yup from 'yup'
+import { TextInput } from '@react-native-material/core';
 
 const signupValidationSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -90,13 +91,13 @@ const SignUpView = () =>  {
                 <>
                   <Text> Enter your phone number</Text>
                   <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                    style={{ width: '80%' }}
                     placeholder="Phone Number"
                     onChangeText={handleChange('phoneNumber')}
                     onBlur={handleBlur('phoneNumber')}
                     value={values.phoneNumber}
                     keyboardType="phone-pad"
-                    autoComplete='tel'
+                    autoComplete=""
                   />
                   {errors.phoneNumber && touched.phoneNumber && (
                     <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
@@ -104,7 +105,7 @@ const SignUpView = () =>  {
 
                   <Text>Enter your name</Text>
                   <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                    style={{  width: '80%' }}
                     placeholder="Name"
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
@@ -116,12 +117,11 @@ const SignUpView = () =>  {
 
                   <Text>Enter your email</Text>
                   <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                    style={{ width: '80%' }}
                     placeholder="E-mail"
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     value={values.email}
-                    keyboardType="email-address"
                   />
                   {errors.email && touched.email && (
                     <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
@@ -130,7 +130,7 @@ const SignUpView = () =>  {
                    {/* paayos pre, need dropbox para sa gender, may example ako na component na dinownload  '<CusSelectDropDown/>' */}
                   <Text>Gender</Text>
                   <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                    style={{  width: '80%' }}
                     placeholder=""
                     value={values.gender}
                     onChangeText={handleChange('gender')}
@@ -147,7 +147,7 @@ const SignUpView = () =>  {
                 <>
                   <Text>Enter OTP</Text>
                   <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, width: '80%' }}
+                    style={{ width: '80%' }}
                     placeholder="Enter OTP"
                     onChangeText={handleChange('otp')}
                     onBlur={handleBlur('otp')}
