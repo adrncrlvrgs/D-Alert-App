@@ -2,7 +2,6 @@ import React,{useState} from 'react'
 import { View,  Button, Text, Alert,TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import auth from "@react-native-firebase/auth"
-import { CusSelectDropDown } from '../../components/index';
 import firestore from "@react-native-firebase/firestore"
 import { Formik } from 'formik';
 import * as Yup from 'yup'

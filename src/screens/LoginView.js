@@ -6,8 +6,6 @@ import { CusBody } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-
-
 import { TextInput,Button } from '@react-native-material/core';
 
 
@@ -91,7 +89,6 @@ const LoginView = () => {
             {!confirm ? (
               <>
                 <TextInput
-                  // style={ {width: '80%' }}
                   placeholder="Phone Number"
                   onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
                   onBlur={handleBlur('phoneNumber')}
@@ -107,7 +104,6 @@ const LoginView = () => {
             ) : (
               <>
                 <TextInput
-                  style={{width: '80%' }}
                   placeholder="Enter OTP"
                   onChangeText={handleChange('otp')}
                   onBlur={handleBlur('otp')}
