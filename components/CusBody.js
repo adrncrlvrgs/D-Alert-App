@@ -13,12 +13,12 @@ const CusBody = ({ components }) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: 24,
+      padding: 15,
       backgroundColor: '#fdfdfd',
       justifyContent:'center',
       alignItems: 'center',
       position: 'relative',
-      fontFamily: 'Roboto'
+      fontFamily: 'Roboto',
     }
 })
 

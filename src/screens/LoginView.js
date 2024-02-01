@@ -1,12 +1,12 @@
 import React,{useState,useRef} from 'react'
-import { View,Text, TouchableOpacity, Alert, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Alert, StyleSheet } from 'react-native'
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore"
 import { CusBody } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { TextInput,Button } from '@react-native-material/core';
+import { TextInput,Button, Text, Flex, VStack, Box } from '@react-native-material/core';
 
 
 //BALI GANITONG PATTERN DIN SA SIGN UP
@@ -66,60 +66,77 @@ const LoginView = () => {
     
     <CusBody
       components={
-        <View>
-      <Text>Login using your number</Text>
+      <>
+      {/* tapos dito sya mag rereflect , paranf forms lang*/}
+        <Formik
+          initialValues={{ phoneNumber: '', otp: '' }}
+          validationSchema={loginValidationSchema}
+          onSubmit={(values) => {
+            if (!confirm) {
+              signIn(values.phoneNumber);
+            } else {
+              confirmCode(values.otp);
+            }
+          }}
+        >
 
+          {/* yung first three na param, default yan, importante yan */}
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+            <Flex style={{justifyContent:'center',flexDirection:'col'}} h={'80%'} w={'90%'}>
+              {!confirm ? (
+                < VStack >
+                  <Box>
+                    <Text>Image here</Text>
+                  </Box>
+                  <Box>
+                    <Text variant='h4'>Login</Text>
+                    <Text>Login using your phone number</Text>
+                    <TextInput
+                      placeholder="Phone Number"
+                      onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
+                      onBlur={handleBlur('phoneNumber')}
+                      value={values.phoneNumber}
+                      keyboardType="phone-pad"
+                      autoComplete='tel'
+                    />
+                    {errors.phoneNumber && touched.phoneNumber && (
+                      <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
+                    )}
+                    <Button onPress={handleSubmit} title='Send Verification' />
+                    
+                  </Box>
+                  <Text style={{textAlign: 'center'}}>
+                    Don't have an account?
+                    <Text
+                      onPress={()=>{
+                        navigation.navigate("Signup")
+                      }}
+                    > 
+                      {' '}Sign up
+                    </Text>
 
-{/* tapos dito sya mag rereflect , paranf forms lang*/}
-      <Formik
-        initialValues={{ phoneNumber: '', otp: '' }}
-        validationSchema={loginValidationSchema}
-        onSubmit={(values) => {
-          if (!confirm) {
-            signIn(values.phoneNumber);
-          } else {
-            confirmCode(values.otp);
-          }
-        }}
-      >
-
-        {/* yung first three na param, default yan, importante yan */}
-        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-          <>
-            {!confirm ? (
-              <>
-                <TextInput
-                  placeholder="Phone Number"
-                  onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
-                  onBlur={handleBlur('phoneNumber')}
-                  value={values.phoneNumber}
-                  keyboardType="phone-pad"
-                  autoComplete='tel'
-                />
-                {errors.phoneNumber && touched.phoneNumber && (
-                  <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
-                )}
-                <Button onPress={handleSubmit} title='Send Verification' />
-              </>
-            ) : (
-              <>
-                <TextInput
-                  placeholder="Enter OTP"
-                  onChangeText={handleChange('otp')}
-                  onBlur={handleBlur('otp')}
-                  value={values.otp}
-                  keyboardType="number-pad"
-                />
-                {errors.otp && touched.otp && (
-                  <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
-                )}
-                <Button onPress={handleSubmit} title='Confirm OTP' />
-              </>
-            )}
-          </>
-        )}
-      </Formik>
-    </View>
+                  </Text>  
+              
+                </ VStack>
+              ) : (
+                <>
+                  <TextInput
+                    placeholder="Enter OTP"
+                    onChangeText={handleChange('otp')}
+                    onBlur={handleBlur('otp')}
+                    value={values.otp}
+                    keyboardType="number-pad"
+                  />
+                  {errors.otp && touched.otp && (
+                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
+                  )}
+                  <Button onPress={handleSubmit} title='Confirm OTP' />
+                </>
+              )}
+            </Flex>
+          )}
+        </Formik>
+      </>
       }
     />
     
