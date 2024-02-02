@@ -6,6 +6,7 @@ import firestore from "@react-native-firebase/firestore"
 import { Formik } from 'formik';
 import * as Yup from 'yup'
 import { TextInput } from '@react-native-material/core';
+import { CusBody } from '../../components';
 
 const signupValidationSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -63,108 +64,113 @@ const SignUpView = () =>  {
 
   return (
     <>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>This the signup screen</Text>
+      <CusBody
+        components={
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>This the signup screen</Text>
 
-        <Formik
-          initialValues={{ 
-            phoneNumber: '', 
-            name: '',
-            email: '',
-            gender: '',
-            otp: '',
-          }}
-          validationSchema={signupValidationSchema}
-          onSubmit={(values) => {
-            if (!confirm) {
-              signUp(values.phoneNumber);
-            } else {
-              confirmCode(values);
-            }
-          }}
-          
-        >
-          {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
-            <>
-              { !confirm? (
-                <>
-                  <Text> Enter your phone number</Text>
-                  <TextInput
-                    style={{ width: '80%' }}
-                    placeholder="Phone Number"
-                    onChangeText={handleChange('phoneNumber')}
-                    onBlur={handleBlur('phoneNumber')}
-                    value={values.phoneNumber}
-                    keyboardType="phone-pad"
-                    autoComplete=""
-                  />
-                  {errors.phoneNumber && touched.phoneNumber && (
-                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
-                  )}
-
-                  <Text>Enter your name</Text>
-                  <TextInput
-                    style={{  width: '80%' }}
-                    placeholder="Name"
-                    onChangeText={handleChange('name')}
-                    onBlur={handleBlur('name')}
-                    value={values.name}
-                  />
-                  {errors.name && touched.name && (
-                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
-                  )}
-
-                  <Text>Enter your email</Text>
-                  <TextInput
-                    style={{ width: '80%' }}
-                    placeholder="E-mail"
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    value={values.email}
-                  />
-                  {errors.email && touched.email && (
-                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
-                  )}
-
-                   {/* paayos pre, need dropbox para sa gender, may example ako na component na dinownload  '<CusSelectDropDown/>' */}
-                  <Text>Gender</Text>
-                  <TextInput
-                    style={{  width: '80%' }}
-                    placeholder=""
-                    value={values.gender}
-                    onChangeText={handleChange('gender')}
-                    onBlur={handleBlur('gender')}
-                  />
-
-                  {errors.gender && touched.gender && (
-                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.gender}</Text>
-                  )}
-
-                  <Button onPress={handleSubmit} title='Register' />
-                </>
-              ):(
-                <>
-                  <Text>Enter OTP</Text>
-                  <TextInput
-                    style={{ width: '80%' }}
-                    placeholder="Enter OTP"
-                    onChangeText={handleChange('otp')}
-                    onBlur={handleBlur('otp')}
-                    value={values.otp}
-                    keyboardType="number-pad"
-                  />
-                  {errors.otp && touched.otp && (
-                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
-                  )}
-                  <Button onPress={handleSubmit} title='Confirm OTP' />
-                </>
-              )
+            <Formik
+              initialValues={{ 
+                phoneNumber: '', 
+                name: '',
+                email: '',
+                gender: '',
+                otp: '',
+              }}
+              validationSchema={signupValidationSchema}
+              onSubmit={(values) => {
+                if (!confirm) {
+                  signUp(values.phoneNumber);
+                } else {
+                  confirmCode(values);
+                }
+              }}
               
-             }
-            </>
-          )}
-        </Formik>
-      </View>
+            >
+              {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
+                <>
+                  { !confirm? (
+                    <>
+                      <Text> Enter your phone number</Text>
+                      <TextInput
+                        style={{ width: '80%' }}
+                        placeholder="Phone Number"
+                        onChangeText={handleChange('phoneNumber')}
+                        onBlur={handleBlur('phoneNumber')}
+                        value={values.phoneNumber}
+                        keyboardType="phone-pad"
+                        autoComplete=""
+                      />
+                      {errors.phoneNumber && touched.phoneNumber && (
+                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
+                      )}
+
+                      <Text>Enter your name</Text>
+                      <TextInput
+                        style={{  width: '80%' }}
+                        placeholder="Name"
+                        onChangeText={handleChange('name')}
+                        onBlur={handleBlur('name')}
+                        value={values.name}
+                      />
+                      {errors.name && touched.name && (
+                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
+                      )}
+
+                      <Text>Enter your email</Text>
+                      <TextInput
+                        style={{ width: '80%' }}
+                        placeholder="E-mail"
+                        onChangeText={handleChange('email')}
+                        onBlur={handleBlur('email')}
+                        value={values.email}
+                      />
+                      {errors.email && touched.email && (
+                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
+                      )}
+
+                      {/* paayos pre, need dropbox para sa gender, may example ako na component na dinownload  '<CusSelectDropDown/>' */}
+                      <Text>Gender</Text>
+                      <TextInput
+                        style={{  width: '80%' }}
+                        placeholder=""
+                        value={values.gender}
+                        onChangeText={handleChange('gender')}
+                        onBlur={handleBlur('gender')}
+                      />
+
+                      {errors.gender && touched.gender && (
+                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.gender}</Text>
+                      )}
+
+                      <Button onPress={handleSubmit} title='Register' />
+                    </>
+                  ):(
+                    <>
+                      <Text>Enter OTP</Text>
+                      <TextInput
+                        style={{ width: '80%' }}
+                        placeholder="Enter OTP"
+                        onChangeText={handleChange('otp')}
+                        onBlur={handleBlur('otp')}
+                        value={values.otp}
+                        keyboardType="number-pad"
+                      />
+                      {errors.otp && touched.otp && (
+                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
+                      )}
+                      <Button onPress={handleSubmit} title='Confirm OTP' />
+                    </>
+                  )
+                  
+                }
+                </>
+              )}
+            </Formik>
+          </View>
+        }
+      />
+      
 
     </>
     

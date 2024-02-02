@@ -1,12 +1,14 @@
 import React,{useState,useRef} from 'react'
-import { View, TouchableOpacity, Alert, StyleSheet } from 'react-native'
+import { View, Alert, StyleSheet, Image } from 'react-native'
+import { TextInput,Button, Text, Flex, VStack, Box } from '@react-native-material/core';
+import Entypo from "@expo/vector-icons/Entypo";
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore"
-import { CusBody } from '../../components'
+import { CusBody, CusButton } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { TextInput,Button, Text, Flex, VStack, Box } from '@react-native-material/core';
+
 
 
 //BALI GANITONG PATTERN DIN SA SIGN UP
@@ -63,7 +65,6 @@ const LoginView = () => {
   };
 
   return (
-    
     <CusBody
       components={
       <>
@@ -85,24 +86,33 @@ const LoginView = () => {
             <Flex style={{justifyContent:'center',flexDirection:'col'}} h={'80%'} w={'90%'}>
               {!confirm ? (
                 < VStack >
-                  <Box>
-                    <Text>Image here</Text>
+                  <Box style={{height: '50%', width: '100%'}}>
+                    <Image
+                      source={require('../../assets/image/login.jpg')}
+                      style={styles.image}
+                      resizeMode="cover"
+                    />
                   </Box>
                   <Box>
                     <Text variant='h4'>Login</Text>
                     <Text>Login using your phone number</Text>
                     <TextInput
+                      style={styles.input}
                       placeholder="Phone Number"
                       onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
                       onBlur={handleBlur('phoneNumber')}
                       value={values.phoneNumber}
                       keyboardType="phone-pad"
                       autoComplete='tel'
+                      outline={false}
+                      leading={<Entypo name='phone' size={20} color={'#243657'}/>}
+                      // underlineColorAndroid='transparent'
                     />
                     {errors.phoneNumber && touched.phoneNumber && (
                       <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
                     )}
-                    <Button onPress={handleSubmit} title='Send Verification' />
+                    {/* <Button onPress={handleSubmit} title='Send Verification' color='#243657'/> */}
+                    <CusButton onPress={ handleSubmit} tittle={ 'Send Verification'} style={{height: 35}}/>
                     
                   </Box>
                   <Text style={{textAlign: 'center'}}>
@@ -111,6 +121,7 @@ const LoginView = () => {
                       onPress={()=>{
                         navigation.navigate("Signup")
                       }}
+                      color='#243657'
                     > 
                       {' '}Sign up
                     </Text>
@@ -119,19 +130,28 @@ const LoginView = () => {
               
                 </ VStack>
               ) : (
-                <>
-                  <TextInput
-                    placeholder="Enter OTP"
-                    onChangeText={handleChange('otp')}
-                    onBlur={handleBlur('otp')}
-                    value={values.otp}
-                    keyboardType="number-pad"
-                  />
-                  {errors.otp && touched.otp && (
-                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
-                  )}
-                  <Button onPress={handleSubmit} title='Confirm OTP' />
-                </>
+                <VStack>
+                  <Box style={{height: '50%', width: '100%'}}> 
+                    <Image
+                      source={require('../../assets/image/otp.png')}
+                      style={styles.image}
+                      resizeMode="cover"
+                    />
+                  </Box>
+                  <Box>
+                    <TextInput
+                      placeholder="Enter OTP"
+                      onChangeText={handleChange('otp')}
+                      onBlur={handleBlur('otp')}
+                      value={values.otp}
+                      keyboardType="number-pad"
+                    />
+                    {errors.otp && touched.otp && (
+                      <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
+                    )}
+                    <CusButton onPress={handleSubmit} tittle={'Confirm OTP'} />
+                  </Box>
+                </VStack>
               )}
             </Flex>
           )}
@@ -148,8 +168,23 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
     textAlign: 'center'
-  }
+  },
+  image:{
+    width: '100%',
+    height: '100%',
+  },
+  input: {
+    justifyContent: 'center',
+    height: 45,
+    borderRadius: 15,
+    overflow: 'hidden'
+  },
 })
 
 
 export default LoginView
+
+
+
+// todo:
+// add CusTextInput component
