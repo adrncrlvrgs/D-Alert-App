@@ -1,6 +1,6 @@
 import React,{useState,useRef} from 'react'
 import { View, Alert, StyleSheet, Image } from 'react-native'
-import { TextInput,Button, Text, Flex, VStack, Box } from '@react-native-material/core';
+import { TextInput, Text, Flex, VStack, Box } from '@react-native-material/core';
 import Entypo from "@expo/vector-icons/Entypo";
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore"
@@ -96,23 +96,27 @@ const LoginView = () => {
                   <Box>
                     <Text variant='h4'>Login</Text>
                     <Text>Login using your phone number</Text>
-                    <TextInput
-                      style={styles.input}
-                      placeholder="Phone Number"
-                      onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
-                      onBlur={handleBlur('phoneNumber')}
-                      value={values.phoneNumber}
-                      keyboardType="phone-pad"
-                      autoComplete='tel'
-                      outline={false}
-                      leading={<Entypo name='phone' size={20} color={'#243657'}/>}
-                      // underlineColorAndroid='transparent'
-                    />
+                    
+                    <Box style={{marginBottom: 10}}>
+                      <TextInput
+                        style={styles.input}
+                        placeholder="Phone Number"
+                        onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
+                        onBlur={handleBlur('phoneNumber')}
+                        value={values.phoneNumber}
+                        keyboardType="phone-pad"
+                        autoComplete='tel'
+                        outline={false}
+                        leading={<Entypo name='phone' size={20} color={'#243657'}/>}
+                        // underlineColorAndroid='transparent'
+                      />
+                    </Box>
+              
                     {errors.phoneNumber && touched.phoneNumber && (
                       <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
                     )}
                     {/* <Button onPress={handleSubmit} title='Send Verification' color='#243657'/> */}
-                    <CusButton onPress={ handleSubmit} tittle={ 'Send Verification'} style={{height: 35}}/>
+                    <CusButton onPress={ handleSubmit} title={ 'Send Verification'} style={{height: 35}}/>
                     
                   </Box>
                   <Text style={{textAlign: 'center'}}>
@@ -149,7 +153,7 @@ const LoginView = () => {
                     {errors.otp && touched.otp && (
                       <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
                     )}
-                    <CusButton onPress={handleSubmit} tittle={'Confirm OTP'} />
+                    <CusButton onPress={handleSubmit} title={'Confirm OTP'} />
                   </Box>
                 </VStack>
               )}

@@ -19,20 +19,12 @@ function StartView() {
           onPress={()=>{
             navigation.navigate("Login")
           }}
-          tittle={'Login'}
+          title={'Login'}
           style={{
             marginTop: 60,
             width: 70 
           }}
         />
-        {/* <Pressable
-          style={styles.button}
-          onPress={()=>{
-            navigation.navigate("Login")
-          }}
-        >
-          <Text>Login</Text>
-        </Pressable> */}
         <Text>Get Started</Text>  
           <Text>
             Don't have an account?

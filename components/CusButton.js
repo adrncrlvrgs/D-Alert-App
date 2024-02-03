@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Pressable, Text, Button } from "@react-native-material/core";
 
-const CusButton = ({style,onPress,tittle}) =>{
+const CusButton = ({style,onPress,title}) =>{
     return (
         <>
             <Pressable
@@ -13,7 +13,7 @@ const CusButton = ({style,onPress,tittle}) =>{
                 style={[styles.button , style]}
                 onPress={ onPress }
                 >
-                <Text variant="button" style={styles.text}>{tittle}</Text>
+                <Text variant="button" style={styles.text}>{title}</Text>
             </Pressable>
         </>
     )

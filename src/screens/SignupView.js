@@ -6,7 +6,7 @@ import firestore from "@react-native-firebase/firestore"
 import { Formik } from 'formik';
 import * as Yup from 'yup'
 import { TextInput } from '@react-native-material/core';
-import { CusBody } from '../../components';
+import { CusBody, CusButton } from '../../components';
 
 const signupValidationSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -66,7 +66,7 @@ const SignUpView = () =>  {
     <>
       <CusBody
         components={
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <>
             <Text>This the signup screen</Text>
 
             <Formik
@@ -99,7 +99,7 @@ const SignUpView = () =>  {
                         onBlur={handleBlur('phoneNumber')}
                         value={values.phoneNumber}
                         keyboardType="phone-pad"
-                        autoComplete=""
+                        autoComplete="tel"
                       />
                       {errors.phoneNumber && touched.phoneNumber && (
                         <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
@@ -159,7 +159,8 @@ const SignUpView = () =>  {
                       {errors.otp && touched.otp && (
                         <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
                       )}
-                      <Button onPress={handleSubmit} title='Confirm OTP' />
+                      
+                      <CusButton onPress={handleSubmit} title={'Confirm OTP'}/>
                     </>
                   )
                   
@@ -167,7 +168,7 @@ const SignUpView = () =>  {
                 </>
               )}
             </Formik>
-          </View>
+          </>
         }
       />
       
