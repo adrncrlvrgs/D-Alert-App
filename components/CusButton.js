@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Pressable, Text, Button } from "@react-native-material/core";
 
+
 const CusButton = ({style,onPress,title}) =>{
     return (
         <>

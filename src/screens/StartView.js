@@ -45,7 +45,6 @@ function StartView() {
   )
 }
 
-
 const styles = StyleSheet.create({
   container: {
     justifyContent:'center',
