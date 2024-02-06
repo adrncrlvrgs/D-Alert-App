@@ -2,41 +2,24 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Box, TextInput } from "@react-native-material/core";
 
-const CusTextField = () =>{
+const CusTextField = ({onChangeText, onBlur,value,placeholder,keyboardType,autoComplete,style, inputStyle,outline,leading}) =>{
     return(
-        <Box style={{marginBottom: 10}}>
+        <Box style={[style]}>
         <TextInput
-          style={styles.input}
-          placeholder="Phone Number"
-          onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
-          onBlur={handleBlur('phoneNumber')}
-          value={values.phoneNumber}
-          keyboardType="phone-pad"
-          autoComplete='tel'
-          outline={false}
-          leading={<Entypo name='phone' size={20} color={'#243657'}/>}
-          // underlineColorAndroid='transparent'
+          onChangeText={onChangeText} // kung ano yung nilagay mo sa schema dapat same rin sila
+          onBlur={onBlur}
+          value={value}
+          placeholder={placeholder}
+          keyboardType={keyboardType}
+          autoComplete={autoComplete}
+          style={inputStyle}
+          outline={outline}
+          leading={leading}
         />
       </Box>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-      justifyContent:'center',
-      alignItems: 'center',
-      textAlign: 'center'
-    },
-    image:{
-      width: '100%',
-      height: '100%',
-    },
-    input: {
-      justifyContent: 'center',
-      height: 45,
-      borderRadius: 15,
-      overflow: 'hidden'
-    },
-  })
+
 
 export default CusTextField

@@ -98,13 +98,13 @@ const LoginView = () => {
                     
                     <Box style={{marginBottom: 10}}>
                       <TextInput
-                        style={styles.input}
-                        placeholder="Phone Number"
                         onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
                         onBlur={handleBlur('phoneNumber')}
                         value={values.phoneNumber}
+                        placeholder="Phone Number"
                         keyboardType="phone-pad"
                         autoComplete='tel'
+                        style={styles.input}
                         outline={false}
                         leading={<Entypo name='phone' size={20} color={'#243657'}/>}
                         // underlineColorAndroid='transparent'
