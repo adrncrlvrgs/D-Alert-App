@@ -68,7 +68,6 @@ const SignUpView = () =>  {
         components={
           <>
             <Text>This the signup screen</Text>
-
             <Formik
               initialValues={{ 
                 phoneNumber: '', 

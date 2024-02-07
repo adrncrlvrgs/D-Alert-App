@@ -4,7 +4,6 @@ import {useNavigation} from "@react-navigation/core"
 import { CusBody, CusButton } from '../../components/index.js';
 import { Text, Button, Pressable } from '@react-native-material/core'
 
-
 function StartView() {
 
   const navigation = useNavigation();
