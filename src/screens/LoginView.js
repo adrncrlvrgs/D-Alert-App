@@ -8,7 +8,7 @@ import { CusBody, CusButton } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-
+//blank push
 //BALI GANITONG PATTERN DIN SA SIGN UP
 
 //etong block na to dito lagi mag ddeclare ng variable ng inputfields

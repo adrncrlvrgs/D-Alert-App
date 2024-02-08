@@ -3,7 +3,7 @@ import {View,TouchableOpacity, StyleSheet,Linking} from 'react-native';
 import {useNavigation} from "@react-navigation/core"
 import { CusBody, CusButton } from '../../components/index.js';
 import { Text, Button, Pressable } from '@react-native-material/core'
-
+//blank push
 function StartView() {
 
   const navigation = useNavigation();
