@@ -1,25 +1,53 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Box, TextInput } from "@react-native-material/core";
+import { Box, TextInput, Text } from "@react-native-material/core";
 
-const CusTextField = ({onChangeText, onBlur,value,placeholder,keyboardType,autoComplete,style, inputStyle,outline,leading}) =>{
+const CusTextField = ({
+  onChangeText, 
+  onBlur,
+  value,
+  placeholder,
+  keyboardType,
+  autoComplete,
+  style, 
+  inputStyle,
+  textAlign,
+  leading,
+  errors,
+  touched
+}) =>{
     return(
-        <Box style={[style]}>
+      <Box style={[style]}>
         <TextInput
-          onChangeText={onChangeText} // kung ano yung nilagay mo sa schema dapat same rin sila
+          onChangeText={onChangeText} 
           onBlur={onBlur}
           value={value}
           placeholder={placeholder}
           keyboardType={keyboardType}
           autoComplete={autoComplete}
-          style={inputStyle}
-          outline={outline}
+          style={[styles.input, inputStyle]}
           leading={leading}
+          textAlign={textAlign}
         />
+        {errors && touched && (
+          <Text style={styles.error}>{errors}</Text>
+        )}
       </Box>
     )
 }
 
-//blank push
+const styles = StyleSheet.create({
+  input: {
+    justifyContent: 'center',
+    height: 45,
+    borderRadius: 15,
+    overflow: 'hidden',
+  },
+  error: {
+    fontSize: 10, 
+    color: 'red'
+  }
+})
+
 
 export default CusTextField

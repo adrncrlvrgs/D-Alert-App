@@ -4,11 +4,10 @@ import { TextInput, Text, Flex, VStack, Box } from '@react-native-material/core'
 import Entypo from "@expo/vector-icons/Entypo";
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore"
-import { CusBody, CusButton } from '../../components'
+import { CusBody, CusButton, CusTextField } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-//blank push
 //BALI GANITONG PATTERN DIN SA SIGN UP
 
 //etong block na to dito lagi mag ddeclare ng variable ng inputfields
@@ -66,7 +65,7 @@ const LoginView = () => {
     <CusBody
       components={
       <>
-      {/* tapos dito sya mag rereflect , paranf forms lang*/}
+      {/* tapos dito sya mag rereflect , parang forms lang*/}
         <Formik
           initialValues={{ phoneNumber: '', otp: '' }}
           validationSchema={loginValidationSchema}
@@ -94,28 +93,21 @@ const LoginView = () => {
                   <Box>
                     <Text variant='h4'>Login</Text>
                     <Text>Login using your phone number</Text>
-                    
-                    <Box style={{marginBottom: 10}}>
-                      <TextInput
-                        onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
-                        onBlur={handleBlur('phoneNumber')}
-                        value={values.phoneNumber}
-                        placeholder="Phone Number"
-                        keyboardType="phone-pad"
-                        autoComplete='tel'
-                        style={styles.input}
-                        outline={false}
-                        leading={<Entypo name='phone' size={20} color={'#243657'}/>}
-                        // underlineColorAndroid='transparent'
-                      />
-                    </Box>
-              
-                    {errors.phoneNumber && touched.phoneNumber && (
-                      <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
-                    )}
-                    {/* <Button onPress={handleSubmit} title='Send Verification' color='#243657'/> */}
+
+                    <CusTextField
+                      onChangeText={handleChange('phoneNumber')} // kung ano yung nilagay mo sa schema dapat same rin sila
+                      onBlur={handleBlur('phoneNumber')}
+                      value={values.phoneNumber}
+                      placeholder="Phone Number"
+                      keyboardType="phone-pad"
+                      autoComplete='tel'
+                      style={{marginVertical: 8}}
+                      textAlign={'left'}
+                      leading={<Entypo name='phone' size={20} color={'#243657'}/>}
+                      errors={errors.phoneNumber}
+                      touched={touched.phoneNumber}
+                    />
                     <CusButton onPress={ handleSubmit} title={ 'Send Verification'} style={{height: 35}}/>
-                    
                   </Box>
                   <Text style={{textAlign: 'center'}}>
                     Don't have an account?
@@ -141,16 +133,18 @@ const LoginView = () => {
                     />
                   </Box>
                   <Box>
-                    <TextInput
-                      placeholder="Enter OTP"
-                      onChangeText={handleChange('otp')}
+                    <CusTextField
+                      onChangeText={handleChange('otp')} 
                       onBlur={handleBlur('otp')}
                       value={values.otp}
+                      placeholder="Enter OTP"
                       keyboardType="number-pad"
+                      autoComplete='sms-otp'
+                      style={{marginVertical: 8}}
+                      textAlign={'center'}
+                      errors={errors.otp}
+                      touched={touched.otp}
                     />
-                    {errors.otp && touched.otp && (
-                      <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
-                    )}
                     <CusButton onPress={handleSubmit} title={'Confirm OTP'} />
                   </Box>
                 </VStack>
@@ -166,20 +160,9 @@ const LoginView = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent:'center',
-    alignItems: 'center',
-    textAlign: 'center'
-  },
   image:{
     width: '100%',
     height: '100%',
-  },
-  input: {
-    justifyContent: 'center',
-    height: 45,
-    borderRadius: 15,
-    overflow: 'hidden'
   },
 })
 
@@ -187,6 +170,3 @@ const styles = StyleSheet.create({
 export default LoginView
 
 
-
-// todo:
-// add CusTextInput component

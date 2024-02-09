@@ -1,12 +1,14 @@
 import React,{useState} from 'react'
-import { View,  Button, Text, Alert,TouchableOpacity } from 'react-native';
+import { View,  Button,  Alert,TouchableOpacity, Image,StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore"
 import { Formik } from 'formik';
 import * as Yup from 'yup'
-import { TextInput } from '@react-native-material/core';
-import { CusBody, CusButton } from '../../components';
+import { TextInput, Flex, VStack, Box, Text } from '@react-native-material/core';
+import { CusBody, CusButton, CusTextField } from '../../components';
+
+import Entypo from "@expo/vector-icons/Entypo";
 
 const signupValidationSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -67,7 +69,6 @@ const SignUpView = () =>  {
       <CusBody
         components={
           <>
-            <Text>This the signup screen</Text>
             <Formik
               initialValues={{ 
                 phoneNumber: '', 
@@ -87,34 +88,49 @@ const SignUpView = () =>  {
               
             >
               {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
-                <>
+                <Flex style={{justifyContent:'center',flexDirection:'col'}} h={'80%'} w={'90%'}>
                   { !confirm? (
-                    <>
-                      <Text> Enter your phone number</Text>
-                      <TextInput
-                        style={{ width: '80%' }}
-                        placeholder="Phone Number"
-                        onChangeText={handleChange('phoneNumber')}
-                        onBlur={handleBlur('phoneNumber')}
-                        value={values.phoneNumber}
-                        keyboardType="phone-pad"
-                        autoComplete="tel"
-                      />
-                      {errors.phoneNumber && touched.phoneNumber && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.phoneNumber}</Text>
-                      )}
+                    <VStack>
+                      <Box style={{height: '50%', width: '100%'}}>
+                        <Image
+                          source={require('../../assets/image/login.jpg')}
+                          style={styles.image}
+                          resizeMode="cover"
+                        />
+                      </Box>
+                      <Box>
+                        <Text variant='h4'>Register</Text>
+                        <Text>Please Register to login.</Text>
 
-                      <Text>Enter your name</Text>
-                      <TextInput
-                        style={{  width: '80%' }}
-                        placeholder="Name"
-                        onChangeText={handleChange('name')}
-                        onBlur={handleBlur('name')}
-                        value={values.name}
-                      />
-                      {errors.name && touched.name && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
-                      )}
+                        <CusTextField
+                          onChangeText={handleChange('phoneNumber')} 
+                          onBlur={handleBlur('phoneNumber')}
+                          value={values.phoneNumber}
+                          placeholder="Phone Number"
+                          keyboardType="phone-pad"
+                          autoComplete='tel'
+                          style={{marginVertical: 8}}
+                          textAlign={'left'}
+                          leading={<Entypo name='phone' size={20} color={'#243657'}/>}
+                          errors={errors.phoneNumber}
+                          touched={touched.phoneNumber}
+                        />
+
+                        <CusTextField
+                          onChangeText={handleChange('name')} 
+                          onBlur={handleBlur('name')}
+                          value={values.name}
+                          placeholder="Full Name"
+                          style={{marginVertical: 8}}
+                          textAlign={'left'}
+                          leading={<Entypo name='user' size={20} color={'#243657'}/>}
+                          errors={errors.name}
+                          touched={touched.name}
+                        />
+
+
+                      </Box>
+
 
                       <Text>Enter your email</Text>
                       <TextInput
@@ -142,8 +158,8 @@ const SignUpView = () =>  {
                         <Text style={{ fontSize: 10, color: 'red' }}>{errors.gender}</Text>
                       )}
 
-                      <Button onPress={handleSubmit} title='Register' />
-                    </>
+                      <CusButton onPress={handleSubmit} title='Register' />
+                    </VStack>
                   ):(
                     <>
                       <Text>Enter OTP</Text>
@@ -164,7 +180,7 @@ const SignUpView = () =>  {
                   )
                   
                 }
-                </>
+                </Flex>
               )}
             </Formik>
           </>
@@ -176,6 +192,13 @@ const SignUpView = () =>  {
     
   )
 }
-//blank push
+
+const styles = StyleSheet.create({
+  image:{
+    width: '100%',
+    height: '100%',
+  },
+})
+
 
 export default SignUpView
