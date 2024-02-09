@@ -128,21 +128,19 @@ const SignUpView = () =>  {
                           touched={touched.name}
                         />
 
+                        <CusTextField
+                          onChangeText={handleChange('email')}
+                          onBlur={handleBlur('email')}
+                          value={values.email}
+                          placeholder={"E-mail"}
+                          textAlign={'left'}
+                          leading={<Entypo name='mail' size={20} color={'#243657'}/>}
+                          errors={errors.email}
+                          touched={touched.email}
+                        />
 
                       </Box>
 
-
-                      <Text>Enter your email</Text>
-                      <TextInput
-                        style={{ width: '80%' }}
-                        placeholder="E-mail"
-                        onChangeText={handleChange('email')}
-                        onBlur={handleBlur('email')}
-                        value={values.email}
-                      />
-                      {errors.email && touched.email && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
-                      )}
 
                       {/* paayos pre, need dropbox para sa gender, may example ako na component na dinownload  '<CusSelectDropDown/>' */}
                       <Text>Gender</Text>
