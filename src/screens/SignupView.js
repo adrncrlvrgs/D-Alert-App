@@ -143,7 +143,7 @@ const SignUpView = () =>  {
 
 
                       {/* paayos pre, need dropbox para sa gender, may example ako na component na dinownload  '<CusSelectDropDown/>' */}
-                      <Text>Gender</Text>
+                      {/* <Text>Gender</Text>
                       <TextInput
                         style={{  width: '80%' }}
                         placeholder=""
@@ -154,24 +154,25 @@ const SignUpView = () =>  {
 
                       {errors.gender && touched.gender && (
                         <Text style={{ fontSize: 10, color: 'red' }}>{errors.gender}</Text>
-                      )}
+                      )} */}
 
                       <CusButton onPress={handleSubmit} title='Register' />
                     </VStack>
                   ):(
                     <>
                       <Text>Enter OTP</Text>
-                      <TextInput
-                        style={{ width: '80%' }}
-                        placeholder="Enter OTP"
-                        onChangeText={handleChange('otp')}
-                        onBlur={handleBlur('otp')}
-                        value={values.otp}
-                        keyboardType="number-pad"
-                      />
-                      {errors.otp && touched.otp && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.otp}</Text>
-                      )}
+                      <CusTextField
+                      onChangeText={handleChange('otp')} 
+                      onBlur={handleBlur('otp')}
+                      value={values.otp}
+                      placeholder="Enter OTP"
+                      keyboardType="number-pad"
+                      autoComplete='sms-otp'
+                      style={{marginVertical: 8}}
+                      textAlign={'center'}
+                      errors={errors.otp}
+                      touched={touched.otp}
+                    />
                       
                       <CusButton onPress={handleSubmit} title={'Confirm OTP'}/>
                     </>
