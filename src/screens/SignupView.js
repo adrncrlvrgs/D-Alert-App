@@ -173,7 +173,6 @@ const SignUpView = () =>  {
                       errors={errors.otp}
                       touched={touched.otp}
                     />
-                      
                       <CusButton onPress={handleSubmit} title={'Confirm OTP'}/>
                     </>
                   )
