@@ -6,7 +6,7 @@ import firestore from "@react-native-firebase/firestore"
 import { Formik } from 'formik';
 import * as Yup from 'yup'
 import { TextInput, Flex, VStack, Box, Text } from '@react-native-material/core';
-import { CusBody, CusButton, CusTextField } from '../../components';
+import { CusBody, CusButton, CusTextField, CusRadioButton } from '../../components';
 
 import Entypo from "@expo/vector-icons/Entypo";
 
@@ -138,6 +138,8 @@ const SignUpView = () =>  {
                           errors={errors.email}
                           touched={touched.email}
                         />
+
+                        <CusRadioButton/>
 
                       </Box>
 

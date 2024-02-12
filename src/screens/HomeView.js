@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text,View,TouchableOpacity} from 'react-native';
 import {useNavigation} from "@react-navigation/core"
-import { CusBody } from '../../components';
+import { CusBody, CusRadioButton } from '../../components';
 
 function HomeView() {
   const navigation = useNavigation();
@@ -9,7 +9,10 @@ function HomeView() {
   return (
     <CusBody
       components={
-        <Text> Dasboard </Text>
+        
+        <CusRadioButton/>
+
+       
       }
     />
   )
