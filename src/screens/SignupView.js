@@ -109,7 +109,7 @@ const SignUpView = () =>  {
                           placeholder="Phone Number"
                           keyboardType="phone-pad"
                           autoComplete='tel'
-                          style={{marginVertical: 8}}
+                          style={{marginTop: 5}}
                           textAlign={'left'}
                           leading={<Entypo name='phone' size={20} color={'#243657'}/>}
                           errors={errors.phoneNumber}
@@ -140,6 +140,7 @@ const SignUpView = () =>  {
                         />
 
                         <CusRadioButton/>
+                        {/* add validation and fucntion */}
 
                       </Box>
 
