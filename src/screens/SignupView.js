@@ -143,7 +143,7 @@ const SignUpView = () =>  {
                         {/* add validation and fucntion */}
 
                       </Box>
-
+                      {/* last blank push */}
 
                       {/* paayos pre, need dropbox para sa gender, may example ako na component na dinownload  '<CusSelectDropDown/>' */}
                       {/* <Text>Gender</Text>
