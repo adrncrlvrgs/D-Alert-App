@@ -6,6 +6,7 @@ import { Text, Button, Pressable } from '@react-native-material/core'
 
 function StartView() {
 
+  
   const navigation = useNavigation();
 
   return (

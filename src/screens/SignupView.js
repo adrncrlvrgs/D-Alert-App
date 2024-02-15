@@ -91,6 +91,7 @@ const SignUpView = () =>  {
               {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
 
               
+
                 <Flex style={{justifyContent:'center',flexDirection:'col'}}  w={'90%'}>
                   <ScrollView style={{ flexGrow: 1}}>
                   { !confirm? (
