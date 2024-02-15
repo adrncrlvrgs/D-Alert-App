@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { View,  Button,  Alert,TouchableOpacity, Image,StyleSheet } from 'react-native';
+import { Alert, Image,StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore"
@@ -65,10 +65,10 @@ const SignUpView = () =>  {
   }
 
   return (
-    <>
+    
       <CusBody
         components={
-          <>
+          
             <Formik
               initialValues={{ 
                 phoneNumber: '', 
@@ -87,17 +87,21 @@ const SignUpView = () =>  {
               }}
               
             >
+              
               {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
-                <Flex style={{justifyContent:'center',flexDirection:'col'}} h={'80%'} w={'90%'}>
+
+              
+                <Flex style={{justifyContent:'center',flexDirection:'col'}}  w={'90%'}>
+                  <ScrollView style={{ flexGrow: 1}}>
                   { !confirm? (
                     <VStack>
-                      <Box style={{height: '50%', width: '100%'}}>
+                      {/* <Box >
                         <Image
                           source={require('../../assets/image/login.jpg')}
                           style={styles.image}
                           resizeMode="cover"
                         />
-                      </Box>
+                      </Box> */}
                       <Box>
                         <Text variant='h4'>Register</Text>
                         <Text>Please Register to login.</Text>
@@ -138,26 +142,19 @@ const SignUpView = () =>  {
                           errors={errors.email}
                           touched={touched.email}
                         />
-
-                        <CusRadioButton/>
+                        <>
+                        <CusRadioButton
+                          onChange={handleChange('gender')}
+                          value={values.gender}
+                          touched={errors.gender}
+                          errors={errors.gender}
+                        />
+                        </>
                         {/* add validation and fucntion */}
 
                       </Box>
-                      {/* last blank push */}
 
-                      {/* paayos pre, need dropbox para sa gender, may example ako na component na dinownload  '<CusSelectDropDown/>' */}
-                      {/* <Text>Gender</Text>
-                      <TextInput
-                        style={{  width: '80%' }}
-                        placeholder=""
-                        value={values.gender}
-                        onChangeText={handleChange('gender')}
-                        onBlur={handleBlur('gender')}
-                      />
-
-                      {errors.gender && touched.gender && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>{errors.gender}</Text>
-                      )} */}
+   
 
                       <CusButton onPress={handleSubmit} title='Register' />
                     </VStack>
@@ -181,15 +178,18 @@ const SignUpView = () =>  {
                   )
                   
                 }
+                </ScrollView>
+               
                 </Flex>
+             
               )}
             </Formik>
-          </>
+            
         }
       />
       
 
-    </>
+    
     
   )
 }
