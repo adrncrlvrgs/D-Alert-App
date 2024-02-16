@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
 
 const GenderRadioButtonGroup = ({ onChange, value, touched, errors }) => {
-
   return (
     <View style={styles.container}>
       <View style={styles.radioButtonContainer}>

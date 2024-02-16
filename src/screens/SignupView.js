@@ -103,8 +103,6 @@ const SignUpView = () =>  {
                           resizeMode="cover"
 
                         />
-
-                        bug
                       </Box> */}
                       <Box>
                         <Text variant='h4'>Register</Text>
