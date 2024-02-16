@@ -12,7 +12,7 @@ const CusBody = ({ components }) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: 15,
+      padding: 20,
       backgroundColor: '#fdfdfd',
       justifyContent:'center',
       alignItems: 'center',

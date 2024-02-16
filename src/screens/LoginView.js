@@ -64,8 +64,6 @@ const LoginView = () => {
   return (
     <CusBody
       components={
-      <>
-      {/* tapos dito sya mag rereflect , parang forms lang*/}
         <Formik
           initialValues={{ phoneNumber: '', otp: '' }}
           validationSchema={loginValidationSchema}
@@ -80,9 +78,9 @@ const LoginView = () => {
 
           {/* yung first three na param, default yan, importante yan */}
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-            <Flex style={{justifyContent:'center',flexDirection:'col'}} h={'80%'} w={'90%'}>
+            <>
               {!confirm ? (
-                < VStack >
+                < VStack  style={{width: "98%", alignSelf: 'center'}}>
                   <Box style={{height: '50%', width: '100%'}}>
                     <Image
                       source={require('../../assets/image/login.jpg')}
@@ -149,12 +147,12 @@ const LoginView = () => {
                   </Box>
                 </VStack>
               )}
-            </Flex>
+            </>
           )}
         </Formik>
-      </>
       }
     />
+    
     
   );
 };

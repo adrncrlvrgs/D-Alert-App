@@ -89,22 +89,18 @@ const SignUpView = () =>  {
             >
               
               {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
-
-              
-
-                <Flex style={{justifyContent:'center',flexDirection:'col'}}  w={'90%'}>
-                  <ScrollView style={{ flexGrow: 1}}>
+                  <>
                   { !confirm? (
-                    <VStack>
-                      {/* <Box >
+                    <VStack style={{width: "98%", alignSelf: 'center'}}>
+                      <Box  style={{justifyContent: 'center'}}>
                         <Image
                           source={require('../../assets/image/login.jpg')}
-                          style={styles.image}
-                          resizeMode="cover"
+                          style={styles.image} 
+                          resizeMode='contain'                        
 
                         />
-                      </Box> */}
-                      <Box>
+                      </Box>
+                      <Box >
                         <Text variant='h4'>Register</Text>
                         <Text>Please Register to login.</Text>
 
@@ -160,29 +156,29 @@ const SignUpView = () =>  {
 
                       <CusButton onPress={handleSubmit} title='Register' />
                     </VStack>
-                  ):(
-                    <>
-                      <Text>Enter OTP</Text>
-                      <CusTextField
-                      onChangeText={handleChange('otp')} 
-                      onBlur={handleBlur('otp')}
-                      value={values.otp}
-                      placeholder="Enter OTP"
-                      keyboardType="number-pad"
-                      autoComplete='sms-otp'
-                      style={{marginVertical: 8}}
-                      textAlign={'center'}
-                      errors={errors.otp}
-                      touched={touched.otp}
-                    />
-                      <CusButton onPress={handleSubmit} title={'Confirm OTP'}/>
-                    </>
-                  )
+                    ):(
+                      <>
+                        <Text>Enter OTP</Text>
+                        <CusTextField
+                        onChangeText={handleChange('otp')} 
+                        onBlur={handleBlur('otp')}
+                        value={values.otp}
+                        placeholder="Enter OTP"
+                        keyboardType="number-pad"
+                        autoComplete='sms-otp'
+                        style={{marginVertical: 8}}
+                        textAlign={'center'}
+                        errors={errors.otp}
+                        touched={touched.otp}
+                      />
+                        <CusButton onPress={handleSubmit} title={'Confirm OTP'}/>
+                      </>
+                    )
                   
-                }
-                </ScrollView>
-               
-                </Flex>
+                  }
+
+                </>
+  
              
               )}
             </Formik>
@@ -198,8 +194,11 @@ const SignUpView = () =>  {
 
 const styles = StyleSheet.create({
   image:{
-    width: '100%',
-    height: '100%',
+    width: 250,
+    height: 250,
+    alignSelf: 'center'
+    // aspectRatio: 1, 
+    // resizeMode: 'contain',
   },
 })
 
