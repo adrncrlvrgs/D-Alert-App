@@ -101,7 +101,10 @@ const SignUpView = () =>  {
                           source={require('../../assets/image/login.jpg')}
                           style={styles.image}
                           resizeMode="cover"
+
                         />
+
+                        bug
                       </Box> */}
                       <Box>
                         <Text variant='h4'>Register</Text>
