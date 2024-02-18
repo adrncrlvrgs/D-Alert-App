@@ -9,11 +9,9 @@ function HomeView() {
 
   return (
     <CusBody
-      components={
-        
+      components={        
         <CodeInput/>
 
-       
       }
     />
   )

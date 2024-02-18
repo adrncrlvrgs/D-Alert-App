@@ -15,8 +15,6 @@ const OTPInput = () => {
     }
   };
 
-  
-
   return (
     <View style={styles.container}>
       {otp.map((value, index) => (

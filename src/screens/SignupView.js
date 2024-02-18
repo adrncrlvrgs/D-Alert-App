@@ -85,6 +85,7 @@ const SignUpView = () =>  {
                 }
               }}
               
+              
             >
               
               {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
