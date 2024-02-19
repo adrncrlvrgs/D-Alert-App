@@ -11,7 +11,6 @@ function HomeView() {
     <CusBody
       components={        
         <CodeInput/>
-
       }
     />
   )
