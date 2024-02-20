@@ -5,6 +5,7 @@ import { CusBody, CusRadioButton } from '../../components';
 import CodeInput from '../../components/CodeInput';
 
 function HomeView() {
+  
   const navigation = useNavigation();
 
   return (
