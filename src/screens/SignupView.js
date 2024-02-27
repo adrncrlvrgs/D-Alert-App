@@ -1,13 +1,12 @@
 import React,{useState} from 'react'
-import { Alert, Image,StyleSheet, ScrollView } from 'react-native';
+import { Alert, Image,StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import auth from "@react-native-firebase/auth"
 import firestore from "@react-native-firebase/firestore"
 import { Formik } from 'formik';
 import * as Yup from 'yup'
-import { TextInput, Flex, VStack, Box, Text } from '@react-native-material/core';
+import { TextInput, VStack, Box, Text } from '@react-native-material/core';
 import { CusBody, CusButton, CusTextField, CusRadioButton } from '../../components';
-
 import Entypo from "@expo/vector-icons/Entypo";
 
 const signupValidationSchema = Yup.object().shape({
@@ -85,7 +84,7 @@ const SignUpView = () =>  {
                 }
               }}
               
-              
+
             >
               
               {({handleChange, handleBlur, handleSubmit, values, errors, touched }) =>(
