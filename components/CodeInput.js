@@ -5,6 +5,7 @@ const OTPInput = () => {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
 
+  
   const handleChange = (text, index) => {
     if (text.length > 1) return; 
     const newOtp = [...otp];
@@ -14,7 +15,6 @@ const OTPInput = () => {
       refs[index + 1].current.focus();
     }
   };
-
   return (
     <View style={styles.container}>
       {otp.map((value, index) => (
