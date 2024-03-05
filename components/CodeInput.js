@@ -47,9 +47,5 @@
 //     textAlign: 'center',
 //   },
 // });
-
-
-
-
 // export default OTPInput;
 // //hold
