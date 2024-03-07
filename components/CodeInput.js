@@ -1,6 +1,7 @@
 // import React, { useState, useRef } from 'react';
 // import { View, TextInput, StyleSheet } from 'react-native';
 
+
 // const OTPInput = () => {
 //   const [otp, setOtp] = useState(['', '', '', '', '', '']);
 //   const refs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
