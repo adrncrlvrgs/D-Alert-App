@@ -14,6 +14,7 @@
 //       refs[index + 1].current.focus();
 //     }
 //   };
+
 //   return (
 //     <View style={styles.container}>
 //       {otp.map((value, index) => (
